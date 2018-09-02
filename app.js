@@ -34,25 +34,27 @@ app.use(limiter(client));
 
 // API routes.
 app.get('/foo', (req, res) => {
-  res.status(200).json({ ok: true })
+  res
+    .status(200)
+    .json({ ok: true });
 });
 
 // Standard error handlers.
 app.use((req, res, next) => {
   res
+    .status(404)
     .json({
       message: `No route for path ${req.path}.`
-    })
-    .status(404);
+    });
   next();
 });
 
 app.use((err, req, res, next) => {
   res
+    .status(err.status || 500)
     .json({
       message: err.message
-    })
-    .status(err.status || 500);
+    });
 });
 
 module.exports = app;

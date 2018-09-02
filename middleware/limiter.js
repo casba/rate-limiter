@@ -35,7 +35,7 @@ module.exports = (connection, options) => {
       Math.round(new Date() / 1000),
       1
     ];
-    console.log(args[5]);
+
     connection.eval(SCRIPT, args, (err, response) => {
       if (err) {
         return next();
